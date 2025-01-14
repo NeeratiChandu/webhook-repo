@@ -43,6 +43,10 @@ def webhook():
             'to_branch': to_branch,
             'timestamp': timestamp
         })
+    @app.route('/events', methods=['GET'])
+    def get_events():
+    events = list(collection.find({}, {'_id': 0}))  # Exclude the MongoDB ID
+    return jsonify(events), 200
 
     return jsonify({'status': 'success'}), 200
 
